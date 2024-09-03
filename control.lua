@@ -5,10 +5,12 @@ require("util")
 function init_global()
   global = global or {}
   global.reactors = global.reactors or {}
+  global.reactors_index = global.reactors_index or nil
   global.db_version = constants.db_version
 end
 
 function migrate_global(data)
+  global.reactors_index = global.reactors_index or nil
   if data.mod_changes[script.mod_name] then
     if global and global.reactors and not global.db_version then
       update_from_version_1()
@@ -283,45 +285,12 @@ function entity_built(event)
   end
 end
 
--- events to capture
 
--- init
-script.on_init(init_global)
-
--- config changed
-script.on_configuration_changed(migrate_global)
-
--- player built reactor or interface ghost
-script.on_event(defines.events.on_built_entity, entity_built,
-{{filter="type", type = constants.reactor_type},
-{filter="ghost_name", name = constants.interface_name}})
--- robot built reactor
-script.on_event(defines.events.on_robot_built_entity, reactor_built,
-{{filter="type", type = constants.reactor_type}})
-
--- reactor died
-script.on_event(defines.events.on_entity_died, reactor_died,
-{{filter="type", type = constants.reactor_type}})
-
--- reactor ghost was deconstructed
-script.on_event(defines.events.on_pre_ghost_deconstructed, reactor_ghost_removed,
-{{filter="ghost_type", type = constants.reactor_type}})
--- reactor ghost was removed by player
-script.on_event(defines.events.on_pre_player_mined_item, reactor_ghost_removed,
-{{filter="ghost_type", type = constants.reactor_type}})
-
--- reactor was cloned
-script.on_event(defines.events.on_entity_cloned, reactor_cloned,
-{{filter="type", type = constants.reactor_type}})
-
--- hotkey pressed
-script.on_event("reactor-interface-toggle", hotkey_pressed)
-
--- update interfaces
--- remove interface if the reactor is no longer valid
-script.on_event(defines.events.on_tick, function(event)
-  local k,v = next(global.reactors, nil)
-  while k do
+-- Not a loop. Only runs once per tick, and stores index in global.
+function tick_interfaces()
+  local k,v = next(global.reactors, global.reactors_index)
+  global.reactors_index = k
+  if v then
     local reactor, interface = v.reactor, v.interface
     if reactor.valid and interface.valid then
       local led = v.led
@@ -365,7 +334,6 @@ script.on_event(defines.events.on_tick, function(event)
           end
         end
       end
-      k, v = next(global.reactors, k)
     else
       if interface.valid then
         interface.destroy()
@@ -373,9 +341,45 @@ script.on_event(defines.events.on_tick, function(event)
       if reactor.valid then
         reactor.active = true
       end
-      local j = k
-      k, v = next(global.reactors, k)
-      global.reactors[j] = nil
+      global.reactors[k] = nil
     end
   end
-end)
+end
+
+-- events to capture
+
+-- init
+script.on_init(init_global)
+
+-- config changed
+script.on_configuration_changed(migrate_global)
+
+-- player built reactor or interface ghost
+script.on_event(defines.events.on_built_entity, entity_built,
+{{filter="type", type = constants.reactor_type},
+{filter="ghost_name", name = constants.interface_name}})
+-- robot built reactor
+script.on_event(defines.events.on_robot_built_entity, reactor_built,
+{{filter="type", type = constants.reactor_type}})
+
+-- reactor died
+script.on_event(defines.events.on_entity_died, reactor_died,
+{{filter="type", type = constants.reactor_type}})
+
+-- reactor ghost was deconstructed
+script.on_event(defines.events.on_pre_ghost_deconstructed, reactor_ghost_removed,
+{{filter="ghost_type", type = constants.reactor_type}})
+-- reactor ghost was removed by player
+script.on_event(defines.events.on_pre_player_mined_item, reactor_ghost_removed,
+{{filter="ghost_type", type = constants.reactor_type}})
+
+-- reactor was cloned
+script.on_event(defines.events.on_entity_cloned, reactor_cloned,
+{{filter="type", type = constants.reactor_type}})
+
+-- hotkey pressed
+script.on_event("reactor-interface-toggle", hotkey_pressed)
+
+-- update interfaces
+-- remove interface if the reactor is no longer valid
+script.on_event(defines.events.on_tick, tick_interfaces)
