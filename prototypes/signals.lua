@@ -15,7 +15,7 @@ data:extend({
         icon_size = 64, icon_mipmaps = 4
       },
       {
-        icon = "__Reactor Interface__/graphics/signal/signal-temperature.png",
+        icon = "__Reactor_Interface_Tweaked__/graphics/signal/signal-temperature.png",
         icon_size = 64, icon_mipmaps = 4
       }
     },
@@ -32,7 +32,7 @@ data:extend({
         icon_size = 64, icon_mipmaps = 4
       },
       {
-        icon = "__Reactor Interface__/graphics/signal/signal-fuel.png",
+        icon = "__Reactor_Interface_Tweaked__/graphics/signal/signal-fuel.png",
         icon_size = 64, icon_mipmaps = 4
       }
     },
@@ -49,7 +49,7 @@ data:extend({
         icon_size = 64, icon_mipmaps = 4
       },
       {
-        icon = "__Reactor Interface__/graphics/signal/signal-stop.png",
+        icon = "__Reactor_Interface_Tweaked__/graphics/signal/signal-stop.png",
         icon_size = 64, icon_mipmaps = 4
       }
     },

@@ -1,10 +1,10 @@
 if settings.startup["reactor-interface-merged"].value and not mods["bobpower"] then
-  data.raw.reactor["nuclear-reactor"].picture.layers[1].filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/reactor.png"
-  data.raw.reactor["nuclear-reactor"].picture.layers[1].hr_version.filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/hr-reactor.png"
-  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[1].filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/reactor-heated.png"
-  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[2].filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/reactor-heated.png"
-  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[1].hr_version.filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/hr-reactor-heated.png"
-  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[2].hr_version.filename = "__Reactor Interface__/graphics/entity/nuclear-reactor/hr-reactor-heated.png"
+  data.raw.reactor["nuclear-reactor"].picture.layers[1].filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/reactor.png"
+  data.raw.reactor["nuclear-reactor"].picture.layers[1].hr_version.filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/hr-reactor.png"
+  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[1].filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/reactor-heated.png"
+  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[2].filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/reactor-heated.png"
+  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[1].hr_version.filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/hr-reactor-heated.png"
+  data.raw.reactor["nuclear-reactor"].heat_buffer.heat_picture.layers[2].hr_version.filename = "__Reactor_Interface_Tweaked__/graphics/entity/nuclear-reactor/hr-reactor-heated.png"
 end
 
 local empty_sprite =
@@ -22,7 +22,7 @@ local function interface_sprite(vector)
   else
     return
     {
-      filename = "__Reactor Interface__/graphics/entity/reactor-interface/reactor-interface.png",
+      filename = "__Reactor_Interface_Tweaked__/graphics/entity/reactor-interface/reactor-interface.png",
       priority = "extra-high",
       width = 64,
       height = 64,
@@ -30,7 +30,7 @@ local function interface_sprite(vector)
       shift = vector,
       render_layer = "wires",
       hr_version = {
-        filename = "__Reactor Interface__/graphics/entity/reactor-interface/hr-reactor-interface.png",
+        filename = "__Reactor_Interface_Tweaked__/graphics/entity/reactor-interface/hr-reactor-interface.png",
         width = 128,
         height = 128,
         frame_count = 1,
@@ -46,14 +46,14 @@ end
 local function interface_led(vector)
   return empty_sprite
   -- {
-  --   filename = "__Reactor Interface__/graphics/entity/reactor-interface/reactor-interface-led.png",
+  --   filename = "__Reactor_Interface_Tweaked__/graphics/entity/reactor-interface/reactor-interface-led.png",
   --   width = 6,
   --   height = 6,
   --   frame_count = 1,
   --   -- shift = vector,
   --   shift = {vector[1] - 0.3125, vector[2] - 0.21875},
   --   hr_version = {
-  --     filename = "__Reactor Interface__/graphics/entity/reactor-interface/hr-reactor-interface-led.png",
+  --     filename = "__Reactor_Interface_Tweaked__/graphics/entity/reactor-interface/hr-reactor-interface-led.png",
   --     width = 12,
   --     height = 12,
   --     frame_count = 1,
@@ -157,7 +157,7 @@ data:extend({
   {
     type = "sprite",
     name = "interface-led-sprite",
-    filename = "__Reactor Interface__/graphics/entity/reactor-interface/hr-reactor-interface-led-white.png",
+    filename = "__Reactor_Interface_Tweaked__/graphics/entity/reactor-interface/hr-reactor-interface-led-white.png",
     priority = "extra-high",
     width = 12,
     height = 12,

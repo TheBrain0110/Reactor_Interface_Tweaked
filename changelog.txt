@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.2.1
+Date: 2022-09-17
+  Bugfixes:
+    - Update prototypes to use new name format
+---------------------------------------------------------------------------------------------------
+Version: 2.2.0
+Date: 2022-09-17
+  Changes:
+    - Forked by TheBrain0110
+    - Modified script to be less UPS-intensive by only checking one interface per tick.
+    - If you have several hundred reactor interfaces they may take a couple seconds to respond to status changes.
+---------------------------------------------------------------------------------------------------
 Version: 2.1.1
 Date: 12. 12. 2020
   Changes:
