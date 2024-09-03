@@ -216,14 +216,16 @@ end
 -- revive ghost if present, creating new interface if autoplace is enabled
 function reactor_built(event)
   local reactor = event.created_entity
-  local interface, interface_is_ghost = find_interface(reactor, defines.direction.north)
-  if interface then
-    if interface_is_ghost then
-      interface = select(2, interface.revive())
+  if reactor.burner then -- Fixes a crash with modded heat generators that don't have a burner fuel slot by ignoring them. Hopefully.
+    local interface, interface_is_ghost = find_interface(reactor, defines.direction.north)
+    if interface then
+      if interface_is_ghost then
+        interface = select(2, interface.revive())
+      end
+      register_interface(reactor, interface)
+    elseif settings.global["reactor-interface-auto-build"].value then
+      create_interface(reactor)
     end
-    register_interface(reactor, interface)
-  elseif settings.global["reactor-interface-auto-build"].value then
-    create_interface(reactor)
   end
 end
 
@@ -359,7 +361,7 @@ script.on_event(defines.events.on_built_entity, entity_built,
 {{filter="type", type = constants.reactor_type},
 {filter="ghost_name", name = constants.interface_name}})
 -- robot built reactor
-script.on_event(defines.events.on_robot_built_entity, reactor_built,
+script.on_event(defines.events.on_robot_built_entity, entity_built,
 {{filter="type", type = constants.reactor_type}})
 
 -- reactor died
