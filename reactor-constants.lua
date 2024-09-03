@@ -6,7 +6,9 @@ return
   {
     ["nuclear-reactor"] = true,
     ["nuclear-reactor-2"] = true,
-    ["nuclear-reactor-3"] = true
+    ["nuclear-reactor-3"] = true,
+    ["se-antimatter-reactor"] = true,
+    ["nullius-reactor"] = true
   },
   reactor_type = "reactor",
   interface_name = "reactor-interface",
