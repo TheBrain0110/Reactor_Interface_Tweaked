@@ -1,0 +1,63 @@
+---------------------------------------------------------------------------------------------------
+Version: 2.1.1
+Date: 12. 12. 2020
+  Changes:
+    - Added graphics for compatibility with Realistic Heat Glow
+---------------------------------------------------------------------------------------------------
+Version: 2.1.0
+Date: 01. 12. 2020
+  Changes:
+    - Interface LED now changes colour to reflect reactor state
+    - All reactors now have visible interface, presence of LED shows if interface is activated
+    - Added option to disable graphical changes if required for mod compatibility
+---------------------------------------------------------------------------------------------------
+Version: 2.0.3
+Date: 26. 11. 2020
+  Changes:
+    - Updated to Factorio 1.1
+    - Added keyboard shortcut info to reactor tooltip
+    - Added support for Bob's Power Thorium and Fusion reactors
+---------------------------------------------------------------------------------------------------
+Version: 2.0.2
+Date: 30. 10. 2020
+  Bugfixes:
+    - Fixed crash on deconstructing reactor ghost
+---------------------------------------------------------------------------------------------------
+Version: 2.0.1
+Date: 27. 10. 2020
+  Bugfixes:
+    - Automatic placement of interfaces now works when the setting is enabled
+    - Fixed GUI briefly appearing when interface clicked in multiplayer
+  Changes:
+    - Added descriptive tooltips to reactor interface and reactor signals
+    - Automatic interface creation enabled by default
+---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 26. 10. 2020
+  Changes:
+    - Interfaces and their circuit connections can now be blueprinted
+    - Interfaces halt reactors if a stop signal is received (fuel consumption and heat generation stop but heat flow continues)
+    - Interfaces are no longer automatically added to all reactors (can be re-enabled in settings)
+    - Added a hotkey to add/remove interface from the currently-selected reactor
+    - Graphical overhaul, the interface now looks like an integral part of the reactor
+---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 01. 09. 2020
+  Changes:
+    - Added new high-res icons to match base graphics
+    - Adjusted position of interface to better fit new reactor graphic (does not apply to existing reactors)
+---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 23. 01. 2020
+  Changes:
+    - Updated to 0.18
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 29. 09. 2019
+  Changes:
+    - Updated to 0.17
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 06. 05. 2017
+  Changes:
+    - Initial release for Factorio 0.15
