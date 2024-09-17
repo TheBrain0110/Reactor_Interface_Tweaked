@@ -216,16 +216,14 @@ end
 -- revive ghost if present, creating new interface if autoplace is enabled
 function reactor_built(event)
   local reactor = event.created_entity
-  if reactor.burner then -- Fixes a crash with modded heat generators that don't have a burner fuel slot by ignoring them. Hopefully.
-    local interface, interface_is_ghost = find_interface(reactor, defines.direction.north)
-    if interface then
-      if interface_is_ghost then
-        interface = select(2, interface.revive())
-      end
-      register_interface(reactor, interface)
-    elseif settings.global["reactor-interface-auto-build"].value then
-      create_interface(reactor)
+  local interface, interface_is_ghost = find_interface(reactor, defines.direction.north)
+  if interface then
+    if interface_is_ghost then
+      interface = select(2, interface.revive())
     end
+    register_interface(reactor, interface)
+  elseif settings.global["reactor-interface-auto-build"].value then
+    create_interface(reactor)
   end
 end
 
@@ -290,6 +288,7 @@ end
 
 -- Not a loop. Only runs once per tick, and stores index in global.
 function tick_interfaces()
+  --if not global.reactors or len(global.reactors)==0 then return end
   local k,v = next(global.reactors, global.reactors_index)
   global.reactors_index = k
   if v then
@@ -304,22 +303,24 @@ function tick_interfaces()
         v.control.parameters = nil
       else
         local parameters = v.signals.parameters
-        local burner = reactor.burner
-        local cell_type, cell_count = next(burner.inventory.get_contents(), nil)
-        local spent_type, spent_count = next(burner.burnt_result_inventory.get_contents(), nil)
         parameters.temp.count = reactor.temperature
-        parameters.fuel.count = math.ceil(100 * burner.remaining_burning_fuel / (burner.currently_burning and burner.currently_burning.fuel_value or 1))
-        if cell_type then
-          parameters.cells.signal.name = cell_type
-          parameters.cells.count = cell_count
-        else
-          parameters.cells.count = 0
-        end
-        if spent_type then
-          parameters.spent.signal.name = spent_type
-          parameters.spent.count = spent_count
-        else
-          parameters.spent.count = 0
+        local burner = reactor.burner
+        if burner then  -- Add burner fuel signals if burner is present
+          local cell_type, cell_count = next(burner.inventory.get_contents(), nil)
+          local spent_type, spent_count = next(burner.burnt_result_inventory.get_contents(), nil)
+          parameters.fuel.count = math.ceil(100 * burner.remaining_burning_fuel / (burner.currently_burning and burner.currently_burning.fuel_value or 1))
+          if cell_type then
+            parameters.cells.signal.name = cell_type
+            parameters.cells.count = cell_count
+          else
+            parameters.cells.count = 0
+          end
+          if spent_type then
+            parameters.spent.signal.name = spent_type
+            parameters.spent.count = spent_count
+          else
+            parameters.spent.count = 0
+          end
         end
         v.control.parameters = parameters
         if interface.get_merged_signal(constants.signal_stop) > 0 then
