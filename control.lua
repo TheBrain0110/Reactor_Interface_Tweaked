@@ -95,6 +95,9 @@ function deregister_interface(reactor)
     global.reactors[reactor.unit_number].interface.destroy()
     global.reactors[reactor.unit_number] = nil
     reactor.active = true
+    if global.reactors_index == reactor.unit_number then
+      global.reactors_index = nil
+    end
   end
 end
 
