@@ -288,7 +288,6 @@ end
 
 -- Not a loop. Only runs once per tick, and stores index in global.
 function tick_interfaces()
-  --if not global.reactors or len(global.reactors)==0 then return end
   local k,v = next(global.reactors, global.reactors_index)
   global.reactors_index = k
   if v then
