@@ -347,6 +347,7 @@ function tick_interfaces()
         reactor.active = true
       end
       global.reactors[k] = nil
+      global.reactors_index = nil
     end
   end
 end
