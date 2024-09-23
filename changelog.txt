@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.3.0
+Date: 2024-09-23
+  Changes:
+    - Fix crash on deletion of reactors
+    - Support non burner reactors
+    - Merges contributions by robot256
+---------------------------------------------------------------------------------------------------
 Version: 2.2.3
 Date: 2024-09-03
   Changes:
